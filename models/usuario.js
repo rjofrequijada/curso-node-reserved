@@ -28,9 +28,14 @@ const UsuarioSchema = Schema({
     },
     google: {
         type: Boolean,
-        require: false
+        default: false
     }
 });
+
+UsuarioSchema.methods.toJSON = function () {
+    const { __v, password, ...usuario } = this.toObject();
+    return usuario;
+}
 
 module.exports = model('Usuarios', UsuarioSchema);
 
